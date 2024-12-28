@@ -180,6 +180,32 @@ function displayImages(images) {
     document.getElementById('load-more-images').style.display = 'block';
 }
 
+async function fetchTrendingImages() {
+    imagesPage = 1;
+    const url = `https://api.pexels.com/v1/curated?per_page=30&page=${imagesPage}`;
+
+    try {
+        const response = await fetch(url, {
+            headers: {
+                'Authorization': apiKey
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error fetching trending images');
+        }
+
+        const data = await response.json();
+        document.getElementById('search-query').value = '';
+        displayImages(data.photos);
+        document.getElementById('videos-list').innerHTML = '';
+        document.getElementById('load-more-videos').style.display = 'none';
+    } catch (error) {
+        console.error('Error fetching trending images:', error);
+        document.getElementById('images-list').innerHTML = `<p>Error fetching trending images: ${error.message}</p>`;
+    }
+}
+
 async function fetchVideos() {
     const url = `https://api.pexels.com/videos/search?query=${searchQuery}&per_page=30&page=${videosPage}`;
 

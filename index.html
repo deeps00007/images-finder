@@ -25,6 +25,7 @@
                 <input type="text" id="search-query" placeholder="Search for images or videos..." onkeypress="handleEnter(event)">
                 <button onclick="performSearch()"><i class="fas fa-search"></i> Search</button>
             </div>
+            <button class="trending-button" onclick="fetchTrendingImages()"><i class="fas fa-fire"></i> Trending</button>
         </div>
         <div id="images-list" class="media-list"></div>
         <button id="load-more-images" class="load-more-button" style="display: none;" onclick="loadMoreImages()">Load More Images</button>
